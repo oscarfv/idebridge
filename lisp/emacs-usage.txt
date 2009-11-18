@@ -19,6 +19,13 @@ while editing a .cs file you can use the folowing functions :
  * *ide-bridge-ensure-connected* : call it if for some reason the connection with  !IdeBridge is lost.
  * *ide-bridge-setup* : this function is called from dino-csharp.el you don't need to call it directly.
 
+Default keybinding defined in dino-csharp.el:
+ * *{{{C-;}}}* : complete at point.
+ * *{{{"."}}}*  : self-insert and complete.
+ * *{{{" "}}}*  : self-insert and complete.
+ * *{{{"("}}}*  : self-insert and complete.
+ * *{{{M-.}}}*  : go to definition.
+
 Active keybinding while completion box is shown:
  * *{{{<down>}}}* : next line in completion list view.
  * *{{{<up>}}}*  : previous line in completion list view.

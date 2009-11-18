@@ -34,6 +34,8 @@ namespace IdeBridge
         {
             _instance = this;
 
+            _ins
+
             // Default values:
             XOffset = 0;
             YOffset = 60;
