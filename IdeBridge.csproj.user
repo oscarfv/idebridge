@@ -11,5 +11,6 @@
     </BootstrapperUrlHistory>
     <FallbackCulture>en-US</FallbackCulture>
     <VerifyUploadedFiles>true</VerifyUploadedFiles>
+    <ReferencePath>E:\Sources\mono\SharpDevelop_3.1.0.4977\bin\</ReferencePath>
   </PropertyGroup>
 </Project>
