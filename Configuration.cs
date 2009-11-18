@@ -26,7 +26,7 @@ namespace IdeBridge
         [DefaultValueAttribute(0)]
         public int XOffset { get; set; }
 
-        [CategoryAttribute("Adjustements"), DescriptionAttribute("The Y offset to add to the location where the popup is shown.")]
+        [CategoryAttribute("Adjustements"), DescriptionAttribute("The Y offset to add to the location where the popup is shown. It's difficult to calculate the exact Y position of point in emacs (du to menu-bar and toolbar) so you have to adjust the Y offset here.")]
         [DefaultValueAttribute(60)]
         public int YOffset { get; set; }
 

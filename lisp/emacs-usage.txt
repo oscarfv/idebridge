@@ -1,0 +1,31 @@
+#summary emacs usage.
+
+=== Emacs Usage ===
+
+There is 3 files in !IdeBridge lisp directory :
+ * *sample_point_emacs.el* : contains sample of what you can put in your .emacs to set-up ide-bridge.el
+ * *ide-bridge.el* : contains the ide-bridge lisp code. You can change the socket port of !IdeBridge here (you need to change the port both in ide-bridge.el and !IdeBridge itself).
+ * *csharp-mode.el* : a csharp-mode if you doesn't already have one.
+ * *dino-csharp.el* : dino csharp-mode enhancements (this file load and setup ide-bridge).
+
+An !IdeBridge.exe instance (and only one) must be running.
+
+while editing a .cs file you can use the folowing functions :
+ * *ide-bridge-set-solution* : !IdeBridge can work only on one specific solution at a time. This function let you set the current solution in !IdeBridge. This function list all solutions found in parent directory of the current file, just choose one. (autocompletion will not work until !IdeBridge has finished to load and parse the selected solution).
+ * *ide-bridge-complete* : do code completion at point.
+ * *ide-bridge-go-to-definition* : jump to the definition of the code element at point.
+ * *ide-bridge-build-project* : Build the project containing the current buffer.
+ * *ide-bridge-rebuild-project* : Rebuild the project containing the current buffer.
+ * *ide-bridge-ensure-connected* : call it if for some reason the connection with  !IdeBridge is lost.
+ * *ide-bridge-setup* : this function is called from dino-csharp.el you don't need to call it directly.
+
+Active keybinding while completion box is shown:
+ * *{{{<down>}}}* : next line in completion list view.
+ * *{{{<up>}}}*  : previous line in completion list view.
+ * *{{{<next>}}}*  : next page in completion list view.
+ * *{{{<prior>}}}*  : previous page in completion list view.
+ * *{{{<ESC>}}}*  : cancel completion.
+ * *{{{C-g}}}*  : cancel completion.
+ * *{{{<tab>}}}*  : complete using selected entry of the completion list view.
+ * *{{{<RET>}}}*  : complete using selected entry of the completion list view.
+ * *{{{<SPC>}}}*  : complete using selected entry of the completion list view.
