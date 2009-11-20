@@ -1,4 +1,4 @@
-﻿﻿﻿using System;
+using System;
 using System.Collections.Generic;
 using System.Text;
 using System.Drawing;
@@ -471,7 +471,6 @@ namespace IdeBridge
 
         public override string Insert()
         {
-            int offset1 = _textArea.ActiveTextAreaControl.Caret.Offset;
             var result = _textArea.DoCompletion();
             if( result.Length > 0 && result[0] == ' ' )
             {
