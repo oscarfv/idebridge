@@ -2,7 +2,6 @@
 ; csharp mode
 ;
 
-;; this file come from : http://blogs.msdn.com/dotnetinterop/
 ;; csharp mode was originally from Brad Merrill, bmerrill@microsoft.com
 ;; but then Dennis Haney (I think) <davh@davh.dk> updated it.
 ;; http://davh.dk/script/

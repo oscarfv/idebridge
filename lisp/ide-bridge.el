@@ -1,4 +1,4 @@
-;; Largely inspired by lisp code found at : http://code.google.com/p/csense/
+;;
 ;; orginal file can be found at : http://code.google.com/p/csense/
 
 (defvar ide-bridge-port 8989
@@ -23,6 +23,13 @@
     (,(kbd "<RET>") . ide-bridge-completion-insert-selection)
     (,(kbd "<SPC>") . ide-bridge-completion-insert-selection-spc))
   "Keybindings for code completion.")
+
+(defvar ide-bridge-insight-bindings
+  `((,(kbd "<down>") . ide-bridge-completion-next-line)
+    (,(kbd "<up>") . ide-bridge-completion-previous-line)
+    (,(kbd "<ESC>") . ide-bridge-completion-cancel)
+    (,(kbd "C-g") . ide-bridge-completion-cleanup))
+  "Keybindings for insight completion.")
 
 (defvar ide-bridge-completion-editing-commands
   '(self-insert-command
@@ -99,14 +106,14 @@
 )
 
 (defun ide-bridge-ensure-connected ()
-  "Connect to the IdeBridge instance if necessary."
+  "Connect to the specific instance of visual if necessary."
   (interactive)
   (if (not (eq (process-status "ide-bridge-process") 'open))
       (ide-bridge-start-process))
 )
 
 (defun ide-bridge-connected ()
-  "Test if connected to the IdeBridge instance."
+  "Test if connected to the specific instance of visual."
   (interactive)
   (if (not (eq (process-status "ide-bridge-process") 'open))
       nil
@@ -267,14 +274,13 @@
                                "|" (if onlyContext "1" "0")
                                "|" (ide-bridge-completion-get-filter)
                                ""))
-  (ide-bridge-init-complete-context)
 )
 
-(defun ide-bridge-init-complete-context ()
+(defun ide-bridge-init-complete-context (context-bindings)
   (add-hook 'pre-command-hook 'ide-bridge-completion-pre-command)
   (add-hook 'post-command-hook 'ide-bridge-completion-post-command)
 
-  (dolist (binding ide-bridge-completion-bindings)
+  (dolist (binding context-bindings)
     (let ((key (car binding))
           (command (cdr binding)))
       (push (cons key (lookup-key (current-local-map) key))
