@@ -73,10 +73,20 @@ namespace IdeBridge
 
         public void SendText(string text)
         {
-            if (text != "")
+            if (text != "" && text != " ")
             {
                 Write(string.Format("(ide-bridge-insert-candidate \"{0}\")", text));
             }
+        }
+
+        public void SetInsightContext()
+        {
+            Write("(ide-bridge-init-complete-context ide-bridge-insight-bindings)");
+        }
+
+        public void SetCompletionContext()
+        {
+            Write("(ide-bridge-init-complete-context ide-bridge-completion-bindings)");
         }
 
         public void GoToDefinition()
@@ -115,6 +125,18 @@ namespace IdeBridge
         public void CancelCompletion()
         {
             Write( "(ide-bridge-completion-cleanup)");
+        }
+
+        public void DoComplete(string txt)
+        {
+            if( txt == "" || txt == " ")
+            {
+                CancelCompletion();
+            }
+            else
+            {
+                SendText(txt);
+            }
         }
 
         public void GoTo()
@@ -246,10 +268,10 @@ namespace IdeBridge
                     case "exception":
                         break;
                     case "insert":
-                        SendText(_backend.Insert());
+                        DoComplete(_backend.Insert());
                         break;
                     case "insert-spc":
-                        SendText(_backend.Insert() + " ");
+                        DoComplete(_backend.Insert() + " ");
                         break;
                     case "save-all":
                         Listener.WriteOther(this, "(save-some-buffers 't)");

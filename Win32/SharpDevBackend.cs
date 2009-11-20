@@ -389,27 +389,41 @@ namespace IdeBridge
 
         public override void Complete()
         {
-            _textArea.FileName = FileName;
-            _textArea.Text = Buffer;
+            try
+            {
+                _textArea.FileName = FileName;
+                _textArea.Text = Buffer;
 
-            if( TrySpecializedCompletion(Column-2, Line-1, Offset-2) ) return;
-            if( TrySpecializedCompletion(Column-1, Line-1, Offset-1) ) return;
+                if (TrySpecializedCompletion(Column - 2, Line - 1, Offset - 2)) return;
+                if (TrySpecializedCompletion(Column - 1, Line - 1, Offset - 1)) return;
 
-            if( OnlyContext ) return;
+                if (OnlyContext) return;
 
-            var loc = new TextLocation(Column, Line - 1);
-            _textArea.ActiveTextAreaControl.Caret.Position = loc;
+                var loc = new TextLocation(Column, Line - 1);
+                _textArea.ActiveTextAreaControl.Caret.Position = loc;
 
-            CtrlSpaceCompletionDataProvider provider = new CtrlSpaceCompletionDataProvider();
-            provider.AllowCompleteExistingExpression = true;
-            _textArea.ShowCompletionWindow(provider, '\0');
+                CtrlSpaceCompletionDataProvider provider = new CtrlSpaceCompletionDataProvider();
+                provider.AllowCompleteExistingExpression = true;
+                _textArea.ShowCompletionWindow(provider, '\0');
 
-            // //string txt = _textArea.ActiveTextAreaControl.
+                // //string txt = _textArea.ActiveTextAreaControl.
 
-            // Message = "offset1 = '" + Offset + "' offset2 = '" + _textArea.ActiveTextAreaControl.Caret.Offset + "'";
-            // Logger.Info(Message);
+                // Message = "offset1 = '" + Offset + "' offset2 = '" + _textArea.ActiveTextAreaControl.Caret.Offset + "'";
+                // Logger.Info(Message);
 
-            // _client.WriteMessage();
+                // _client.WriteMessage();
+            }
+            finally
+            {
+                if (_textArea.IsInInsight)
+                {
+                    _client.SetInsightContext();
+                }
+                else if( _textArea.IsInCompletion )
+                {
+                    _client.SetCompletionContext();
+                }
+            }
         }
 
         public override void Insight()

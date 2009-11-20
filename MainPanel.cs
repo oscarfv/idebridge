@@ -94,7 +94,7 @@ namespace IdeBridge
 
                 stopButton.Enabled = true;
 
-                Logger.Info("the server is started");
+                Logger.Info("the IdeBridge server is started");
             }
             catch (System.Exception exc1)
             {
