@@ -1,0 +1,22 @@
+Installation from Binaries:
+
+    download the binary package and extract it somewhere.
+    launch IdeBridge.exe
+    eventually adjust settings in the configuration tab
+    look at the EmacsInstructions. 
+
+Installation from Sources:
+
+    download IdeBridge sources.
+    download SharpDevelop sources :
+        option 1:
+            from the official site: http://www.icsharpcode.net/OpenSource/SD/ download and extract SharpDevelop_3.1.0.4977_Source.zip
+            open a cmd.exe in the directory IdeBridge/PatchSharpDevelop/
+            launch: patch.bat <path-to-your-sharpdevelop-sources>. 
+        option 2 :
+            download the already patched SharpDevelop sources from IdeBridge google code page. 
+    compile the patched SharpDevelop (using either <path-to-your-sharpdevelop-sources>/src/releasebuild.bat or <path-to-your-sharpdevelop-sources>/src/debugbuild.bat)
+    update the reference path to the SharpDevelop dlls : in the file IdeBridge/IdeBridge.csproj.user update the ReferencePath value to <path-to-your-sharpdevelop-sources>/bin
+    copy the directory <path-to-your-sharpdevelop-sources>\AddIns\AddIns\BackendBindings\CSharpBinding in IdeBridge/bin/Addins
+    compile the IdeBridge solution.
+    then Follow Installation from binaries instructions. 
